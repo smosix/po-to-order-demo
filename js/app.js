@@ -1,5 +1,5 @@
 import { CATALOGUE, findBranch, findCustomer, findProduct } from "./data.js";
-import { MODELS, extractOrder, getSettings, replayOrder, saveSettings } from "./extract.js";
+import { checkConnection, extractOrder, getSettings, isLive, replayOrder, saveSettings } from "./extract.js";
 
 const SAMPLES = [
   { id: "01-brightwater-cctv-po", title: "Clean PDF purchase order", customer: "Brightwater Security Systems", tag: "CCTV · EUR", blurb: "A tidy typed PO with part numbers, plus one price that's below list." },
@@ -28,37 +28,56 @@ const val = (v, fallback = '<span class="skeleton"></span>') => (v == null || v 
 
 // ------------------------------------------------------------------ settings / mode
 function refreshMode() {
-  const { apiKey, model } = getSettings();
+  const live = isLive();
   const pill = $("#modePill");
-  const label = MODELS.find((m) => m.id === model)?.label.split(" (")[0] || model;
-  pill.classList.toggle("live", !!apiKey);
-  pill.textContent = apiKey ? `Live AI · ${label.replace("Claude ", "")}` : "Demo mode · recorded results";
-  pill.title = apiKey ? "Documents are read live by Claude" : "Samples play back recorded results. Add an API key to read any document live.";
+  pill.classList.toggle("live", live);
+  pill.textContent = live ? `Live AI${liveModel ? ` · ${liveModel}` : ""}` : "Demo mode · recorded results";
+  pill.title = live ? "Documents are read live by OpenAI" : "Samples play back recorded results. Enter the passcode to read any document live.";
 }
+let liveModel = localStorage.getItem("po-demo.model") || "";
 
 let pendingFile = null;
 function openSettings(message) {
-  const { apiKey, model, replaySamples } = getSettings();
-  $("#apiKey").value = apiKey;
+  const { proxyUrl, passcode, replaySamples } = getSettings();
+  $("#passcode").value = passcode;
+  $("#proxyUrl").value = proxyUrl;
   $("#replaySamples").checked = replaySamples;
-  $("#modelSel").innerHTML = MODELS.map((m) => `<option value="${m.id}" ${m.id === model ? "selected" : ""}>${esc(m.label)}</option>`).join("");
+  setStatus("");
   if (message) toast(message);
   $("#settingsDlg").showModal();
 }
 
-$("#settingsForm").addEventListener("submit", (e) => {
+function setStatus(text, isErr = false) {
+  const el = $("#settingsStatus");
+  el.textContent = text;
+  el.classList.toggle("err", isErr);
+}
+
+$("#settingsForm").addEventListener("submit", async (e) => {
   e.preventDefault();
-  saveSettings({ apiKey: $("#apiKey").value, model: $("#modelSel").value, replaySamples: $("#replaySamples").checked });
+  const next = { proxyUrl: $("#proxyUrl").value.trim(), passcode: $("#passcode").value.trim(), replaySamples: $("#replaySamples").checked };
+  if (next.passcode) {
+    if (!next.proxyUrl) return setStatus("No proxy address set (see Advanced).", true);
+    setStatus("Checking…");
+    try {
+      const { model } = await checkConnection(next);
+      liveModel = model || "";
+      localStorage.setItem("po-demo.model", liveModel);
+    } catch (err) {
+      return setStatus(err.status === 401 ? "Wrong passcode." : err.status === 403 ? "This site isn't allowed by the proxy." : "Couldn't reach the proxy.", true);
+    }
+  }
+  saveSettings(next);
   refreshMode();
   $("#settingsDlg").close();
-  toast(getSettings().apiKey ? "Live AI enabled" : "Demo mode: samples use recorded results");
+  toast(isLive() ? "Live AI enabled" : "Demo mode: samples use recorded results");
   const file = pendingFile;
   pendingFile = null;
-  if (file && getSettings().apiKey) startRun({ file, name: file.name });
+  if (file && isLive()) startRun({ file, name: file.name });
 });
 $("#settingsDlg").addEventListener("cancel", () => (pendingFile = null));
 $("#cancelSettings").addEventListener("click", () => { pendingFile = null; $("#settingsDlg").close(); });
-$("#clearKey").addEventListener("click", () => ($("#apiKey").value = ""));
+$("#clearKey").addEventListener("click", () => { $("#passcode").value = ""; setStatus(""); });
 $("#settingsBtn").addEventListener("click", () => openSettings());
 $("#modePill").addEventListener("click", () => openSettings());
 
@@ -89,9 +108,9 @@ document.addEventListener("drop", (e) => { e.preventDefault(); if (!$("#home").c
 function handleFile(file) {
   if (!file) return;
   if (!/pdf|png|jpe?g|webp/i.test(file.type) && !/\.pdf$/i.test(file.name)) return toast("Please choose a PDF or an image file.");
-  if (!getSettings().apiKey) {
+  if (!isLive()) {
     pendingFile = file;
-    return openSettings("Reading your own documents needs live AI. Add an API key to continue.");
+    return openSettings("Reading your own documents needs live AI. Enter the demo passcode to continue.");
   }
   startRun({ file, name: file.name });
 }
@@ -158,8 +177,7 @@ async function startRun(source) {
 
   try {
     let result;
-    const { apiKey, replaySamples } = getSettings();
-    const live = !!apiKey && !source.forceReplay && !(source.sampleId && replaySamples);
+    const live = isLive() && !source.forceReplay && !(source.sampleId && getSettings().replaySamples);
     if (live) {
       const file = source.file || (await fetchAsFile(source.url, source.name));
       result = await extractOrder(file, { onPartial, signal: controller.signal });
@@ -204,9 +222,12 @@ function showError(me, err) {
   $(".scanline")?.remove();
   $("#timer").textContent = "";
   let msg = err?.message || String(err);
-  if (err?.status === 401) msg = "The API key was rejected. Check it in Settings.";
+  if (err?.status === 401) msg = "The passcode was rejected. Check it in Settings.";
+  else if (err?.status === 403) msg = "This site isn't on the proxy's allowed list.";
+  else if (err?.status === 413) msg = "That file is too large. Try one under 20 MB.";
   else if (err?.status === 429) msg = "Rate limit reached. Wait a moment and try again.";
-  else if (err?.status === 529 || err?.status >= 500) msg = "The AI service is busy right now. Try again in a few seconds.";
+  else if (err?.status === 502) msg = `OpenAI couldn't process the request: ${msg}`;
+  else if (err?.status >= 500) msg = "The AI service is busy right now. Try again in a few seconds.";
   else if (/fetch|network/i.test(msg)) msg = "Couldn't reach the AI service. Check the internet connection.";
   const canReplay = !!me.source.sampleId;
   $("#orderBody").innerHTML = `<div class="error-box"><h3>Something went wrong</h3><p>${esc(msg)}</p>

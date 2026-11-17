@@ -1,5 +1,5 @@
 {
-  "summary": "Brightwater Security Systems are ordering 30 CCTV items (cameras, a 16-channel NVR, drives and cable) for their Clontarf Medical Centre job, needed by 20 Nov.",
+  "summary": "Brightwater Security Systems are ordering CCTV equipment across 7 lines for the Clontarf Medical Centre upgrade, required by 20 November 2026.",
   "document": {
     "kind": "purchase_order",
     "language": "English"
@@ -11,7 +11,7 @@
     "contact_name": "Aoife Brennan",
     "contact_email": "aoife.brennan@brightwatersecurity.ie",
     "contact_phone": "+353 1 555 0142",
-    "vat_number": "IE 3345678QH"
+    "vat_number": "IE3345678QH"
   },
   "order": {
     "po_number": "BWS-PO-24117",
@@ -20,7 +20,7 @@
     "quote_reference": null,
     "job_reference": "Clontarf Medical Centre – CCTV upgrade",
     "currency": "EUR",
-    "payment_terms": "30 days end of month"
+    "payment_terms": "30 days end of month as per account"
   },
   "fulfilment": {
     "method": "delivery",
@@ -33,9 +33,9 @@
         "Dublin 12"
       ],
       "postcode": "D12 X9K4",
-      "country": "Ireland"
+      "country": "IE"
     },
-    "instructions": "Goods-in open 08:00–16:30, Mon–Fri. Quote PO number on all delivery dockets."
+    "instructions": "Goods-in open 08:00–16:30, Mon–Fri. Quote PO number BWS-PO-24117 on all delivery dockets and invoices. Contact Aoife on +353 1 555 0142 with queries or substitutions; no substitutions without approval."
   },
   "lines": [
     {
@@ -46,7 +46,7 @@
       "po_unit_price": 139,
       "sku": "FT-HIK-2347G2LU",
       "match_confidence": "high",
-      "match_note": "Exact part number"
+      "match_note": "Exact part number."
     },
     {
       "line": 2,
@@ -56,7 +56,7 @@
       "po_unit_price": 149,
       "sku": "FT-HIK-2T47G2L",
       "match_confidence": "high",
-      "match_note": "Exact part number"
+      "match_note": "Exact part number."
     },
     {
       "line": 3,
@@ -66,7 +66,7 @@
       "po_unit_price": 12,
       "sku": "FT-HIK-1280ZJXS",
       "match_confidence": "high",
-      "match_note": "Exact part number"
+      "match_note": "Exact part number."
     },
     {
       "line": 4,
@@ -76,7 +76,7 @@
       "po_unit_price": 459,
       "sku": "FT-HIK-7616K2-16P",
       "match_confidence": "high",
-      "match_note": "Exact part number"
+      "match_note": "Exact part number."
     },
     {
       "line": 5,
@@ -86,7 +86,7 @@
       "po_unit_price": 229,
       "sku": "FT-HDD-8TB",
       "match_confidence": "high",
-      "match_note": "Exact part number"
+      "match_note": "Exact part number."
     },
     {
       "line": 6,
@@ -96,7 +96,7 @@
       "po_unit_price": 169,
       "sku": "FT-CAB-CAT6EXT",
       "match_confidence": "high",
-      "match_note": "Customer's own code; description matches external CAT6 305m"
+      "match_note": "Exact specification match for external PE black CAT6 in a 305m box; customer part code differs."
     },
     {
       "line": 7,
@@ -106,7 +106,7 @@
       "po_unit_price": 129,
       "sku": "FT-HIK-MON22",
       "match_confidence": "high",
-      "match_note": "Exact part number"
+      "match_note": "Exact part number."
     }
   ],
   "totals": {
@@ -118,11 +118,11 @@
   "flags": [
     {
       "severity": "warning",
-      "message": "Line 4 NVR is priced at €459.00 on the PO vs €489.00 list (€30.00, 6.1% below) — check for an agreed discount."
+      "message": "Confirm line 4 pricing: the PO unit price of €459 is €30 (6.13%) below the €489 list price."
     },
     {
       "severity": "info",
-      "message": "Customer asks for no substitutions without approval."
+      "message": "Deliver within goods-in hours of 08:00–16:30, Monday–Friday, and obtain Aoife's approval before any substitutions."
     }
   ]
 }

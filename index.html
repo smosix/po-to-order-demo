@@ -98,22 +98,27 @@
   <dialog id="settingsDlg" class="dlg">
     <form id="settingsForm">
       <h2>AI settings</h2>
-      <p class="muted">With no API key, the six sample orders play back results recorded earlier, so the demo works offline. Add an Anthropic API key to read any document live.</p>
+      <p class="muted">Without a passcode, the six sample orders play back results recorded earlier, so the demo works offline. Enter the demo passcode to read any document live with OpenAI.</p>
       <label class="field">
-        <span>Anthropic API key</span>
-        <input id="apiKey" type="password" placeholder="sk-ant-…" autocomplete="off" spellcheck="false" />
-        <small>Stored only in this browser (localStorage) and sent only to api.anthropic.com. Use a key with a spend limit.</small>
+        <span>Demo passcode</span>
+        <input id="passcode" type="password" placeholder="Passcode" autocomplete="off" spellcheck="false" />
+        <small>Remembered in this browser only. The OpenAI key itself is never sent to the browser; it stays on the server.</small>
       </label>
-      <label class="field">
-        <span>Model</span>
-        <select id="modelSel"></select>
-      </label>
+      <details class="adv">
+        <summary>Advanced</summary>
+        <label class="field">
+          <span>Proxy address</span>
+          <input id="proxyUrl" type="url" placeholder="https://….workers.dev" autocomplete="off" spellcheck="false" />
+          <small>The Cloudflare Worker that holds the OpenAI key.</small>
+        </label>
+      </details>
       <label class="check">
         <input id="replaySamples" type="checkbox" />
-        <span>Play the six sample orders from recordings even when a key is set (instant, no network needed)</span>
+        <span>Play the six sample orders from recordings even when live AI is on (instant, no network needed)</span>
       </label>
       <div class="dlg-actions">
-        <button type="button" id="clearKey" class="ghost-btn">Remove key</button>
+        <button type="button" id="clearKey" class="ghost-btn">Forget passcode</button>
+        <span id="settingsStatus" class="settings-status" role="status"></span>
         <span class="spacer"></span>
         <button type="button" id="cancelSettings" class="ghost-btn">Cancel</button>
         <button type="submit" id="saveSettings" class="primary-btn">Save</button>

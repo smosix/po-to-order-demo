@@ -1,0 +1,12 @@
+name = "po-to-order-demo-proxy"
+main = "src/index.js"
+compatibility_date = "2026-11-01"
+
+[vars]
+# Sites allowed to call this Worker (comma-separated, exact origins)
+ALLOWED_ORIGINS = "https://smosix.github.io,http://localhost:8765"
+OPENAI_MODEL = "gpt-6.1-sol"
+REASONING_EFFORT = "low"
+
+# Secrets, set with:  npx wrangler secret put OPENAI_API_KEY   (and DEMO_PASSCODE)
+# For local dev they are read from .dev.vars (git-ignored).

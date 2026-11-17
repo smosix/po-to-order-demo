@@ -1,130 +1,34 @@
-// Calls Claude directly from the browser to turn a purchase-order PDF into a structured order.
-// The API key is supplied by the presenter at runtime and kept in this browser's localStorage only.
-import { Anthropic, partialParse } from "./vendor/anthropic-sdk.js";
-import { BRANCHES, CATALOGUE, CUSTOMERS } from "./data.js";
-
-export const MODELS = [
-  { id: "claude-opus-5-5", label: "Claude Opus 5.5 (most accurate)" },
-  { id: "claude-sonnet-5-5", label: "Claude Sonnet 5.5 (balanced)" },
-  { id: "claude-haiku-5-5", label: "Claude Haiku 5.5 (fastest)" },
-];
-
-const str = { type: "string" };
-const num = { type: "number" };
-const nullable = (schema) => ({ anyOf: [schema, { type: "null" }] });
-const obj = (properties) => ({
-  type: "object",
-  additionalProperties: false,
-  required: Object.keys(properties),
-  properties,
-});
-const confidence = { type: "string", enum: ["high", "medium", "low", "none"] };
-
-export const ORDER_SCHEMA = obj({
-  summary: { type: "string", description: "One plain-English sentence describing the order, for a non-technical reader." },
-  document: obj({
-    kind: { type: "string", enum: ["purchase_order", "email_order", "handwritten_order", "other"] },
-    language: { type: "string", description: "Language of the document, e.g. English, Dutch" },
-  }),
-  customer: obj({
-    name: str,
-    account: nullable({ type: "string", description: "Matched customer account code from the customer list, or null" }),
-    account_confidence: confidence,
-    contact_name: nullable(str),
-    contact_email: nullable(str),
-    contact_phone: nullable(str),
-    vat_number: nullable(str),
-  }),
-  order: obj({
-    po_number: nullable(str),
-    po_date: nullable({ type: "string", description: "ISO date YYYY-MM-DD" }),
-    required_date: nullable({ type: "string", description: "ISO date YYYY-MM-DD; earliest date if phased" }),
-    quote_reference: nullable(str),
-    job_reference: nullable(str),
-    currency: { type: "string", enum: ["EUR", "GBP"] },
-    payment_terms: nullable(str),
-  }),
-  fulfilment: obj({
-    method: { type: "string", enum: ["delivery", "collection"] },
-    branch: { type: "string", description: "Fulfilling branch id from the branch list" },
-    deliver_to: nullable(obj({
-      name: str,
-      address_lines: { type: "array", items: str },
-      postcode: nullable(str),
-      country: str,
-    })),
-    instructions: nullable({ type: "string", description: "Delivery/collection instructions, site contact, access times" }),
-  }),
-  lines: {
-    type: "array",
-    items: obj({
-      line: { type: "integer" },
-      customer_ref: nullable({ type: "string", description: "Customer's own part code as written, if any" }),
-      description: { type: "string", description: "Item description as written on the document (translated to English in brackets if not English)" },
-      quantity: num,
-      po_unit_price: nullable({ type: "number", description: "Unit price written on the PO, excl. tax; null if not stated" }),
-      sku: nullable({ type: "string", description: "Matched Fortus SKU from the catalogue, or null if no reasonable match" }),
-      match_confidence: confidence,
-      match_note: { type: "string", description: "Short reason for the match, e.g. 'Exact part number' or 'Assumed standard PIR'" },
-    }),
-  },
-  totals: obj({
-    po_subtotal: nullable({ type: "number", description: "Subtotal excl. tax as printed on the document" }),
-    po_tax: nullable(num),
-    po_total: nullable(num),
-    tax_rate_percent: nullable(num),
-  }),
-  flags: {
-    type: "array",
-    items: obj({
-      severity: { type: "string", enum: ["warning", "info"] },
-      message: { type: "string", description: "One short sentence a sales administrator can act on" },
-    }),
-  },
-});
-
-function systemPrompt() {
-  const cat = CATALOGUE.map((p) => `${p.sku} | ${p.brand} ${p.mpn} | ${p.description} | per ${p.unit} | EUR ${p.price_eur} | GBP ${p.price_gbp}`).join("\n");
-  const cust = CUSTOMERS.map((c) => `${c.account} | ${c.name} | ${c.town} | ${c.country} | ${c.currency} | home branch ${c.home_branch}`).join("\n");
-  const br = BRANCHES.map((b) => `${b.id} | ${b.name} | ${b.country}`).join("\n");
-  return `You are the order-entry assistant for Fortus, a distributor of security products (CCTV, fire, access control, intruder alarms, gate automation) to installers across Ireland, the UK and the Netherlands.
-
-A sales administrator will give you a customer purchase order. It may be a formal PO, a forwarded email, a handwritten order pad or a scan, in any language. Read every page and return the data needed to key a sales order.
-
-Rules:
-- Extract only what the document says. Use null when something is not stated; never invent PO numbers, prices, dates or contacts.
-- Dates: return ISO YYYY-MM-DD. Resolve relative dates ("for Thursday", "w/c 23/11") against the document date. Day-first dates are normal in Ireland, UK and NL.
-- Numbers: return plain numbers (Dutch "1.234,50" is 1234.50). Unit prices exclude tax.
-- Customer: match to an account in the customer list by name, address, email domain or account number. Beware of similarly named companies. Use null if unsure.
-- Lines: one entry per item ordered. Do not add items the customer only asked a price for or mentioned in passing; flag those instead. Ignore labour or non-product lines unless clearly ordered.
-- SKU matching: choose the Fortus SKU that is the item ordered, using part numbers first, then brand + description. If the description fits several products, pick the most standard one and use medium or low confidence and say why in match_note. If nothing in the catalogue fits, sku = null and confidence "none".
-- Branch: use the branch named on the document if any, otherwise the customer's home branch, otherwise the nearest branch.
-- Flags: raise a warning for anything a person must check before booking the order: PO unit price differing from list price by more than 2%, printed totals that do not equal the sum of lines, missing prices, items with no catalogue match, low-confidence matches, unusual VAT treatment, missing PO number or delivery date, special delivery requirements. Use info for helpful notes (e.g. phased delivery, collection, price requests). Keep each flag to one sentence and mention numbers.
-- The summary is one friendly sentence, e.g. "Brightwater are ordering 18 CCTV items for a medical centre job, needed by 20 Nov."
-
-FORTUS CATALOGUE (sku | brand part number | description | unit | list prices):
-${cat}
-
-CUSTOMER ACCOUNTS (account | name | town | country | currency | home branch):
-${cust}
-
-BRANCHES (id | name | country):
-${br}`;
-}
+// Sends a purchase order to the Cloudflare Worker proxy, which calls OpenAI and streams the
+// structured result back. The OpenAI key never reaches the browser: the browser only holds the
+// demo passcode, which the Worker checks.
+import { partialParse } from "./vendor/partial-json.js";
+import { DEFAULT_PROXY_URL } from "./config.js";
 
 export function getSettings() {
   return {
-    apiKey: localStorage.getItem("po-demo.apiKey") || "",
-    model: localStorage.getItem("po-demo.model") || MODELS[0].id,
+    proxyUrl: (localStorage.getItem("po-demo.proxyUrl") || DEFAULT_PROXY_URL).replace(/\/+$/, ""),
+    passcode: localStorage.getItem("po-demo.passcode") || "",
     replaySamples: localStorage.getItem("po-demo.replaySamples") === "1",
   };
 }
 
-export function saveSettings({ apiKey, model, replaySamples }) {
+export const isLive = (s = getSettings()) => !!(s.proxyUrl && s.passcode);
+
+export function saveSettings({ proxyUrl, passcode, replaySamples }) {
+  const url = (proxyUrl || "").trim().replace(/\/+$/, "");
+  if (url && url !== DEFAULT_PROXY_URL) localStorage.setItem("po-demo.proxyUrl", url);
+  else localStorage.removeItem("po-demo.proxyUrl");
+  if (passcode) localStorage.setItem("po-demo.passcode", passcode.trim());
+  else localStorage.removeItem("po-demo.passcode");
   localStorage.setItem("po-demo.replaySamples", replaySamples ? "1" : "0");
-  if (apiKey) localStorage.setItem("po-demo.apiKey", apiKey.trim());
-  else localStorage.removeItem("po-demo.apiKey");
-  localStorage.setItem("po-demo.model", model);
+}
+
+/** Quick check that the Worker is reachable and the passcode is right. Returns { model }. */
+export async function checkConnection({ proxyUrl, passcode }) {
+  const res = await fetch(`${proxyUrl.replace(/\/+$/, "")}/health`, { headers: { "X-Demo-Passcode": passcode } });
+  const body = await res.json().catch(() => ({}));
+  if (!res.ok) throw httpError(res.status, body.error);
+  return body;
 }
 
 async function fileToBase64(file) {
@@ -134,72 +38,95 @@ async function fileToBase64(file) {
   return btoa(bin);
 }
 
-/**
- * Run the extraction. onPartial(partialObject, phase) is called as JSON streams in.
- * Returns { order, usage, model, ms }.
- */
-export async function extractOrder(file, { onPartial, onPhase, signal } = {}) {
-  const { apiKey, model } = getSettings();
-  if (!apiKey) throw new Error("No API key set. Open Settings to add one.");
-  const client = new Anthropic({ apiKey, dangerouslyAllowBrowser: true, maxRetries: 2 });
-
-  const isPdf = file.type === "application/pdf" || /\.pdf$/i.test(file.name);
-  const isImage = /^image\/(png|jpe?g|gif|webp)$/.test(file.type);
-  if (!isPdf && !isImage) throw new Error("Please upload a PDF or an image (PNG/JPG).");
-  const data = await fileToBase64(file);
-  const docBlock = isPdf
-    ? { type: "document", source: { type: "base64", media_type: "application/pdf", data } }
-    : { type: "image", source: { type: "base64", media_type: file.type === "image/jpg" ? "image/jpeg" : file.type, data } };
-
-  const started = performance.now();
-  onPhase?.("reading");
-
-  // Server-side refusal fallback is enabled for Opus/Sonnet (not available on Haiku).
-  const fallback = model.includes("haiku") ? {} : { betas: ["server-side-fallback-2026-07-01"], fallbacks: "default" };
-
-  const stream = client.beta.messages.stream(
-    {
-      model,
-      max_tokens: 32000,
-      ...fallback,
-      thinking: { type: "adaptive" },
-      output_config: { effort: "low", format: { type: "json_schema", schema: ORDER_SCHEMA } },
-      system: [{ type: "text", text: systemPrompt(), cache_control: { type: "ephemeral" } }],
-      messages: [
-        {
-          role: "user",
-          content: [docBlock, { type: "text", text: `File name: ${file.name}\nExtract this order. Today's date is ${new Date().toISOString().slice(0, 10)}.` }],
-        },
-      ],
-    },
-    { signal },
-  );
-
-  let json = "";
-  let last = 0;
-  stream.on("text", (delta) => {
-    json += delta;
-    const now = performance.now();
-    if (now - last > 120) {
-      last = now;
-      try {
-        onPartial?.(partialParse(json));
-      } catch {
-        /* incomplete JSON fragment; wait for more */
-      }
-    }
-  });
-
-  const message = await stream.finalMessage();
-  if (message.stop_reason === "refusal") throw new Error("The model declined to process this document.");
-  if (message.stop_reason === "max_tokens") throw new Error("The document was too long to finish extracting.");
-  const text = message.content.filter((b) => b.type === "text").map((b) => b.text).join("");
-  const order = JSON.parse(text);
-  onPartial?.(order);
-  return { order, usage: message.usage, model: message.model, ms: performance.now() - started };
+function httpError(status, message) {
+  const err = new Error(message || `Request failed (${status})`);
+  err.status = status;
+  return err;
 }
 
-/** Replays a pre-computed result with the same streaming feel (used when no API key is set). */
+/**
+ * Run the extraction. onPartial(partialObject) is called as JSON streams in.
+ * Returns { order, usage, model, ms }.
+ */
+export async function extractOrder(file, { onPartial, signal } = {}) {
+  const { proxyUrl, passcode } = getSettings();
+  if (!proxyUrl || !passcode) throw new Error("Live AI isn't set up. Open Settings to add the passcode.");
+
+  const isPdf = file.type === "application/pdf" || /\.pdf$/i.test(file.name);
+  const mime = isPdf ? "application/pdf" : file.type === "image/jpg" ? "image/jpeg" : file.type;
+  if (!/^(application\/pdf|image\/(png|jpeg|webp|gif))$/.test(mime)) throw new Error("Please upload a PDF or an image (PNG/JPG).");
+
+  const started = performance.now();
+  const res = await fetch(`${proxyUrl}/extract`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "X-Demo-Passcode": passcode },
+    body: JSON.stringify({ filename: file.name, mime, data: await fileToBase64(file), today: new Date().toISOString().slice(0, 10) }),
+    signal,
+  });
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}));
+    throw httpError(res.status, body.error);
+  }
+
+  // Read OpenAI's server-sent events as they arrive.
+  const reader = res.body.pipeThrough(new TextDecoderStream()).getReader();
+  let buffer = "";
+  let json = "";
+  let last = 0;
+  let final = null;
+  for (;;) {
+    const { value, done } = await reader.read();
+    if (done) break;
+    buffer += value;
+    let idx;
+    while ((idx = buffer.indexOf("\n\n")) !== -1) {
+      const raw = buffer.slice(0, idx);
+      buffer = buffer.slice(idx + 2);
+      const data = raw.split("\n").filter((l) => l.startsWith("data:")).map((l) => l.slice(5).trimStart()).join("\n");
+      if (!data || data === "[DONE]") continue;
+      let ev;
+      try {
+        ev = JSON.parse(data);
+      } catch {
+        continue;
+      }
+      if (ev.type === "response.output_text.delta") {
+        json += ev.delta || "";
+        const now = performance.now();
+        if (now - last > 120) {
+          last = now;
+          try {
+            onPartial?.(partialParse(json));
+          } catch {
+            /* fragment not parseable yet */
+          }
+        }
+      } else if (ev.type === "response.refusal.delta" || ev.type === "response.refusal.done") {
+        throw new Error("The model declined to process this document.");
+      } else if (ev.type === "response.completed" || ev.type === "response.incomplete" || ev.type === "response.failed") {
+        final = ev.response || {};
+      } else if (ev.type === "error") {
+        throw new Error(ev.message || ev.error?.message || "The AI service reported an error.");
+      }
+    }
+  }
+
+  if (!final) throw new Error("The connection closed before the result was complete. Try again.");
+  if (final.status === "failed") throw new Error(final.error?.message || "The AI service couldn't process this document.");
+  if (final.status === "incomplete") {
+    const reason = final.incomplete_details?.reason;
+    throw new Error(reason === "max_output_tokens" ? "The document was too long to finish extracting." : `The result was incomplete (${reason || "unknown reason"}).`);
+  }
+  if (!json) {
+    // fall back to the text in the final response object
+    json = (final.output || []).flatMap((o) => o.content || []).filter((c) => c.type === "output_text").map((c) => c.text).join("");
+  }
+  const order = JSON.parse(json);
+  onPartial?.(order);
+  return { order, usage: final.usage || null, model: final.model || "OpenAI", ms: performance.now() - started };
+}
+
+/** Replays a pre-recorded result with the same streaming feel (used when live AI isn't set up). */
 export async function replayOrder(order, { onPartial, signal, durationMs = 9000 } = {}) {
   const started = performance.now();
   const json = JSON.stringify(order);

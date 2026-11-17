@@ -1,5 +1,5 @@
 {
-  "summary": "VeiligWerk Beveiliging are ordering Hikvision CCTV and a Pyronix wireless alarm (27 items) for an office project in Utrecht, needed by 27 Nov.",
+  "summary": "VeiligWerk Beveiliging B.V. are ordering 27 CCTV and intruder alarm items for project De Wissel in Utrecht, for delivery on 27 November 2026.",
   "document": {
     "kind": "purchase_order",
     "language": "Dutch"
@@ -20,7 +20,7 @@
     "quote_reference": null,
     "job_reference": "PRJ-2611 De Wissel",
     "currency": "EUR",
-    "payment_terms": "30 days from invoice date"
+    "payment_terms": "Payment within 30 days of invoice date."
   },
   "fulfilment": {
     "method": "delivery",
@@ -34,78 +34,78 @@
       "postcode": "3511 ED",
       "country": "Netherlands"
     },
-    "instructions": "Deliver via the rear entrance and report to reception. Part deliveries only by agreement. Email order confirmation to inkoop@veiligwerk.nl."
+    "instructions": "Deliver via the rear entrance and report to reception. Partial deliveries only by prior agreement. Email order confirmation to inkoop@veiligwerk.nl and quote IO-2026-0412 on the packing slip and invoice."
   },
   "lines": [
     {
-      "line": 1,
+      "line": 10,
       "customer_ref": "DS-2CD2387G2-LU",
-      "description": "Hikvision 8MP ColorVu turretcamera 2,8mm (8MP ColorVu turret camera)",
+      "description": "Hikvision 8MP ColorVu turretcamera 2,8mm [Hikvision 8MP ColorVu turret camera, 2.8mm]",
       "quantity": 6,
       "po_unit_price": 189,
       "sku": "FT-HIK-2387G2LU",
       "match_confidence": "high",
-      "match_note": "Exact part number"
+      "match_note": "Exact manufacturer part number."
     },
     {
-      "line": 2,
+      "line": 20,
       "customer_ref": "DS-2CD2143G2-I",
-      "description": "Hikvision 4MP AcuSense domecamera 2,8mm (4MP AcuSense dome camera)",
+      "description": "Hikvision 4MP AcuSense domecamera 2,8mm [Hikvision 4MP AcuSense dome camera, 2.8mm]",
       "quantity": 8,
       "po_unit_price": 119,
       "sku": "FT-HIK-2143G2I",
       "match_confidence": "high",
-      "match_note": "Exact part number"
+      "match_note": "Exact manufacturer part number."
     },
     {
-      "line": 3,
+      "line": 30,
       "customer_ref": "DS-7616NXI-K2/16P",
-      "description": "Hikvision NVR 16 kanalen met PoE (16-channel NVR with PoE)",
+      "description": "Hikvision NVR 16 kanalen met PoE [Hikvision 16-channel NVR with PoE]",
       "quantity": 1,
       "po_unit_price": 489,
       "sku": "FT-HIK-7616K2-16P",
       "match_confidence": "high",
-      "match_note": "Exact part number"
+      "match_note": "Exact manufacturer part number."
     },
     {
-      "line": 4,
+      "line": 40,
       "customer_ref": "ST4000VX016",
-      "description": "Harde schijf 4TB surveillance (4TB surveillance hard drive)",
+      "description": "Harde schijf 4TB surveillance [4TB surveillance hard drive]",
       "quantity": 2,
       "po_unit_price": 119,
       "sku": "FT-HDD-4TB",
       "match_confidence": "high",
-      "match_note": "Exact part number"
+      "match_note": "Exact manufacturer part number."
     },
     {
-      "line": 5,
+      "line": 50,
       "customer_ref": "ENF32WE-APP",
-      "description": "Pyronix Enforcer 32-WE draadloze centrale (wireless panel)",
+      "description": "Pyronix Enforcer 32-WE draadloze centrale [Pyronix Enforcer 32-WE wireless alarm panel]",
       "quantity": 1,
       "po_unit_price": 399,
       "sku": "FT-PYR-ENF32WE",
       "match_confidence": "high",
-      "match_note": "Exact part number"
+      "match_note": "Exact manufacturer part number."
     },
     {
-      "line": 6,
+      "line": 60,
       "customer_ref": "KX10DP-WE",
-      "description": "Pyronix draadloze PIR, huisdiervriendelijk (wireless pet-tolerant PIR)",
+      "description": "Pyronix draadloze PIR, huisdiervriendelijk [Pyronix wireless pet-tolerant PIR]",
       "quantity": 5,
       "po_unit_price": 49,
       "sku": "FT-PYR-KX10DP",
       "match_confidence": "high",
-      "match_note": "Exact part number"
+      "match_note": "Exact manufacturer part number."
     },
     {
-      "line": 7,
+      "line": 70,
       "customer_ref": "MC1MINI-WE",
-      "description": "Draadloos magneetcontact (mini) (wireless mini door contact)",
+      "description": "Draadloos magneetcontact (mini) [Wireless mini magnetic door contact]",
       "quantity": 4,
       "po_unit_price": 29,
       "sku": "FT-PYR-MC1MINI",
       "match_confidence": "high",
-      "match_note": "Exact part number"
+      "match_note": "Exact manufacturer part number."
     }
   ],
   "totals": {
@@ -117,19 +117,15 @@
   "flags": [
     {
       "severity": "warning",
-      "message": "PO adds 21% Dutch BTW (€750.33) — confirm the VAT treatment for this cross-border order with accounts."
+      "message": "Arrange delivery on 27 November via the rear entrance at Stationsplein 14 and ensure the driver reports to reception."
     },
     {
       "severity": "info",
-      "message": "Document is in Dutch; line descriptions translated."
+      "message": "Obtain prior agreement before making partial deliveries against IO-2026-0412."
     },
     {
       "severity": "info",
-      "message": "Customer wants an order confirmation emailed to inkoop@veiligwerk.nl."
-    },
-    {
-      "severity": "info",
-      "message": "All unit prices match list prices."
+      "message": "Email the order confirmation to inkoop@veiligwerk.nl and include IO-2026-0412 on the packing slip and invoice."
     }
   ]
 }

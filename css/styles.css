@@ -210,6 +210,10 @@ tr.row-bad td:first-child { box-shadow: inset 3px 0 0 var(--bad); }
 .field span { font-weight: 600; font-size: 14px; }
 .field input, .field select { font: inherit; padding: 10px 12px; border: 1px solid #cfd6e0; border-radius: 10px; }
 .field small { color: var(--muted); font-size: 12.5px; }
+.adv { margin: -4px 0 12px; font-size: 14px; }
+.adv summary { cursor: pointer; color: var(--muted); margin-bottom: 10px; }
+.settings-status { font-size: 13px; color: var(--muted); }
+.settings-status.err { color: var(--bad); }
 .check { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; margin: 4px 0 16px; color: #344054; }
 .check input { margin-top: 3px; }
 .dlg-actions { display: flex; gap: 8px; align-items: center; margin-top: 8px; }

@@ -1,5 +1,5 @@
 {
-  "summary": "Seán Kelly Alarms want a Pyronix wireless alarm kit (25 items) for the O'Driscoll job, collecting from Cork on Friday 20 Nov.",
+  "summary": "Seán Kelly Alarms are ordering 25 alarm items for the O’Driscoll house in Ballincollig, for collection from Cork on Friday morning, 20 November.",
   "document": {
     "kind": "handwritten_order",
     "language": "English"
@@ -8,7 +8,7 @@
     "name": "Seán Kelly Alarms",
     "account": "C10655",
     "account_confidence": "high",
-    "contact_name": "Seán Kelly",
+    "contact_name": "Seán K.",
     "contact_email": null,
     "contact_phone": "087 555 0193",
     "vat_number": null
@@ -18,7 +18,7 @@
     "po_date": "2026-11-16",
     "required_date": "2026-11-20",
     "quote_reference": null,
-    "job_reference": "O'Driscoll house – Ballincollig",
+    "job_reference": "O’Driscoll house - Ballincollig",
     "currency": "EUR",
     "payment_terms": null
   },
@@ -26,7 +26,7 @@
     "method": "collection",
     "branch": "CRK",
     "deliver_to": null,
-    "instructions": "Customer will collect from Cork branch on Friday morning (20 Nov)."
+    "instructions": "Will collect from Cork branch Friday morning."
   },
   "lines": [
     {
@@ -37,7 +37,7 @@
       "po_unit_price": null,
       "sku": "FT-PYR-ENF32WE",
       "match_confidence": "high",
-      "match_note": "Pyronix Enforcer 32-WE with app"
+      "match_note": "Enforcer 32 wireless panel with app matches the specified model."
     },
     {
       "line": 2,
@@ -47,7 +47,7 @@
       "po_unit_price": null,
       "sku": "FT-PYR-KX15DQWE",
       "match_confidence": "medium",
-      "match_note": "Assumed standard Pyronix wireless PIR; pet-tolerant KX10DP-WE also available"
+      "match_note": "Assumed standard Pyronix wireless quad PIR for the Enforcer system; pet tolerance not specified."
     },
     {
       "line": 3,
@@ -57,7 +57,7 @@
       "po_unit_price": null,
       "sku": "FT-PYR-MC1MINI",
       "match_confidence": "high",
-      "match_note": "Pyronix wireless mini door contact"
+      "match_note": "Wireless mini door contact matches the Pyronix system."
     },
     {
       "line": 4,
@@ -66,8 +66,8 @@
       "quantity": 2,
       "po_unit_price": null,
       "sku": "FT-PYR-DBELLWE",
-      "match_confidence": "high",
-      "match_note": "Pyronix Deltabell wireless siren"
+      "match_confidence": "medium",
+      "match_note": "Assumed wireless blue Deltabell variant for the Enforcer wireless system."
     },
     {
       "line": 5,
@@ -77,7 +77,7 @@
       "po_unit_price": null,
       "sku": "FT-PYR-FOBWE",
       "match_confidence": "medium",
-      "match_note": "Assumed Pyronix wireless keyfob to suit the Enforcer"
+      "match_note": "Assumed Pyronix wireless 4-button keyfobs for the Enforcer system."
     },
     {
       "line": 6,
@@ -86,8 +86,8 @@
       "quantity": 1,
       "po_unit_price": null,
       "sku": "FT-PYR-DIGI4G",
-      "match_confidence": "high",
-      "match_note": "Pyronix 4G communicator"
+      "match_confidence": "medium",
+      "match_note": "Assumed Pyronix DIGI-4G communicator for the Enforcer system."
     }
   ],
   "totals": {
@@ -99,19 +99,11 @@
   "flags": [
     {
       "severity": "warning",
-      "message": "No prices on the order — list prices applied (€2,025.00 ex VAT)."
-    },
-    {
-      "severity": "warning",
-      "message": "\"Wireless PIRs\" matched to KX15DQ-WE — confirm whether pet-tolerant detectors are needed."
+      "message": "Confirm prices for all 6 lines before booking, as no unit prices are stated."
     },
     {
       "severity": "info",
-      "message": "Handwritten order pad, scanned — pad number 0347 used as the customer reference."
-    },
-    {
-      "severity": "info",
-      "message": "Collection from Cork branch on Friday 20 Nov, so no delivery is needed."
+      "message": "Prepare order 0347 for Cork collection on Friday morning, 20 November 2026."
     }
   ]
 }

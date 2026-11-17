@@ -1,5 +1,5 @@
 {
-  "summary": "Kingdom Gates want a Roger brushless swing-gate kit with accessories (12 items) for a Kenmare job, delivered to their Tralee yard by Thursday 19 Nov.",
+  "summary": "Kingdom Gates & Automation are ordering a Roger swing gate kit, accessories and outdoor CAT6 cable for their Kenmare job, for delivery to their Tralee yard by 19 November.",
   "document": {
     "kind": "email_order",
     "language": "English"
@@ -26,15 +26,16 @@
     "method": "delivery",
     "branch": "CRK",
     "deliver_to": {
-      "name": "Kingdom Gates & Automation",
+      "name": "Kingdom Gates & Automation yard",
       "address_lines": [
         "Unit 3, Clash Industrial Estate",
-        "Tralee, Co. Kerry"
+        "Tralee",
+        "Co. Kerry"
       ],
       "postcode": "V92 T6K2",
-      "country": "Ireland"
+      "country": "IE"
     },
-    "instructions": "Deliver to the Tralee yard. If arriving after 4pm, ring Mike on 087 555 0164 — the gate will be locked."
+    "instructions": "Deliver to the Tralee yard, not the Kenmare job; if arriving after 16:00, call Mike on 087 555 0164 as the gate will be locked."
   },
   "lines": [
     {
@@ -45,57 +46,57 @@
       "po_unit_price": null,
       "sku": "FT-ROG-BH30KIT",
       "match_confidence": "high",
-      "match_note": "Brushless swing kit, 2 leaves up to 3m"
+      "match_note": "Roger brushless swing kit supports 2 leaves up to 3m each."
     },
     {
       "line": 2,
       "customer_ref": null,
-      "description": "Pair of photocells",
+      "description": "pair of photocells",
       "quantity": 2,
       "po_unit_price": null,
       "sku": "FT-ROG-F4ES",
-      "match_confidence": "high",
-      "match_note": "Roger photocells, pair"
+      "match_confidence": "medium",
+      "match_note": "Assumed Roger F4ES surface-mount photocells to accompany the Roger kit; quantity is pairs."
     },
     {
       "line": 3,
       "customer_ref": null,
-      "description": "Remotes (the 2 button ones)",
+      "description": "remotes (the 2 button ones)",
       "quantity": 6,
       "po_unit_price": null,
       "sku": "FT-ROG-E80TX52R",
       "match_confidence": "high",
-      "match_note": "Roger 2-channel remote"
+      "match_note": "Roger 2-channel remote matches the 2-button remotes requested for the kit."
     },
     {
       "line": 4,
       "customer_ref": null,
-      "description": "Flashing light",
+      "description": "flashing light",
       "quantity": 1,
       "po_unit_price": null,
       "sku": "FT-ROG-FIFTHY",
-      "match_confidence": "high",
-      "match_note": "Roger LED flashing beacon"
+      "match_confidence": "medium",
+      "match_note": "Assumed Roger R92/LED flashing beacon to accompany the Roger kit."
     },
     {
       "line": 5,
       "customer_ref": null,
-      "description": "Key switch",
+      "description": "key switch",
       "quantity": 1,
       "po_unit_price": null,
       "sku": "FT-ROG-H85TDS",
-      "match_confidence": "high",
-      "match_note": "Roger key selector switch"
+      "match_confidence": "medium",
+      "match_note": "Assumed Roger H85/TDS surface key selector switch for the gate kit."
     },
     {
       "line": 6,
       "customer_ref": null,
-      "description": "Box of the outdoor cat6",
+      "description": "box of the outdoor cat6",
       "quantity": 1,
       "po_unit_price": null,
       "sku": "FT-CAB-CAT6EXT",
-      "match_confidence": "high",
-      "match_note": "External CAT6, 305m box"
+      "match_confidence": "medium",
+      "match_note": "Matched standard external CAT6 cable box; assumed catalogue 305m black PE specification."
     }
   ],
   "totals": {
@@ -107,19 +108,19 @@
   "flags": [
     {
       "severity": "warning",
-      "message": "No prices in the email — list prices applied (€1,764.00 ex VAT)."
+      "message": "Prices are missing for all 6 order lines; confirm account pricing before booking."
+    },
+    {
+      "severity": "warning",
+      "message": "For delivery after 16:00, the driver must call Mike on 087 555 0164 because the yard gate will be locked."
     },
     {
       "severity": "info",
-      "message": "Price request only: 2 x 12V 7Ah batteries — not added to the order; send a quote (list €19.00 each)."
+      "message": "Quote separately for 2 x 12V 7Ah batteries (FT-BAT-12V7); these are explicitly not ordered."
     },
     {
       "severity": "info",
-      "message": "\"For Thursday\" read as Thursday 19 Nov 2026 (email sent Monday 16 Nov)."
-    },
-    {
-      "severity": "info",
-      "message": "\"Usual account\" matched to Kingdom Gates & Automation (C10390) by name and email address."
+      "message": "Thursday resolves to 19 November 2026 from the email dated 16 November 2026."
     }
   ]
 }

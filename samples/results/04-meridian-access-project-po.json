@@ -1,5 +1,5 @@
 {
-  "summary": "Meridian Access Solutions are ordering a Paxton Net2 access control package (13 lines) for Aston Science Park Block C, in two delivery phases from 24 Nov.",
+  "summary": "Meridian Access Solutions are ordering access-control equipment for Aston Science Park – Block C, with phased deliveries due by 24 November and 8 December 2026.",
   "document": {
     "kind": "purchase_order",
     "language": "English"
@@ -20,7 +20,7 @@
     "quote_reference": "Q-BHM-30981",
     "job_reference": "Aston Science Park – Block C access control",
     "currency": "GBP",
-    "payment_terms": "30 days EOM"
+    "payment_terms": "30 days from end of month of invoice, subject to receipt of a valid invoice."
   },
   "fulfilment": {
     "method": "delivery",
@@ -28,13 +28,14 @@
     "deliver_to": {
       "name": "Meridian Access Solutions Ltd",
       "address_lines": [
-        "Unit 12, Heartlands Business Park",
+        "Unit 12",
+        "Heartlands Business Park",
         "Birmingham"
       ],
       "postcode": "B7 5QR",
-      "country": "United Kingdom"
+      "country": "UK"
     },
-    "instructions": "Phase 1 (lines 1–6) by 24/11/2026; Phase 2 (lines 7–13) by 08/12/2026. Part deliveries accepted — mark the phase on each delivery note. Deliveries 08:00–16:00 Mon–Fri."
+    "instructions": "Phase 1 (lines 1–6) required by 2026-11-24; Phase 2 (lines 7–13) required by 2026-12-08. Part deliveries accepted; mark the project phase on each delivery note. Deliver Monday–Friday, 08:00–16:00, unless otherwise agreed in writing. PO MAS-10452 must appear on all delivery notes, invoices and correspondence. No substitutions of products, brands or part numbers without the buyer's written approval."
   },
   "lines": [
     {
@@ -45,7 +46,7 @@
       "po_unit_price": 329,
       "sku": "FT-PAX-682531",
       "match_confidence": "high",
-      "match_note": "Exact part number"
+      "match_note": "Exact part number."
     },
     {
       "line": 2,
@@ -55,7 +56,7 @@
       "po_unit_price": 75,
       "sku": "FT-PAX-P75",
       "match_confidence": "high",
-      "match_note": "Exact part number"
+      "match_note": "Exact brand and part number."
     },
     {
       "line": 3,
@@ -65,7 +66,7 @@
       "po_unit_price": 99,
       "sku": "FT-PAX-KP75",
       "match_confidence": "high",
-      "match_note": "Exact part number"
+      "match_note": "Exact brand and part number."
     },
     {
       "line": 4,
@@ -75,7 +76,7 @@
       "po_unit_price": 49,
       "sku": "FT-ACC-MAG600M",
       "match_confidence": "high",
-      "match_note": "Exact part number"
+      "match_note": "Exact part number and specification."
     },
     {
       "line": 5,
@@ -85,7 +86,7 @@
       "po_unit_price": 16,
       "sku": "FT-ACC-BGGRN",
       "match_confidence": "high",
-      "match_note": "Exact part number"
+      "match_note": "Exact part number."
     },
     {
       "line": 6,
@@ -95,7 +96,7 @@
       "po_unit_price": 24,
       "sku": "FT-ACC-NTEXIT",
       "match_confidence": "high",
-      "match_note": "Exact part number"
+      "match_note": "Exact part number."
     },
     {
       "line": 7,
@@ -105,7 +106,7 @@
       "po_unit_price": 33,
       "sku": "FT-PAX-692052",
       "match_confidence": "high",
-      "match_note": "Exact part number"
+      "match_note": "Exact part number; quantity is 15 packs of 10."
     },
     {
       "line": 8,
@@ -115,7 +116,7 @@
       "po_unit_price": 25,
       "sku": "FT-PAX-ISO10",
       "match_confidence": "high",
-      "match_note": "Exact part number"
+      "match_note": "Exact part number; quantity is 10 packs of 10."
     },
     {
       "line": 9,
@@ -125,7 +126,7 @@
       "po_unit_price": 169,
       "sku": "FT-PAX-NET2PRO",
       "match_confidence": "high",
-      "match_note": "Exact part number"
+      "match_note": "Exact part number."
     },
     {
       "line": 10,
@@ -135,7 +136,7 @@
       "po_unit_price": 509,
       "sku": "FT-PAX-ENTRYKIT",
       "match_confidence": "high",
-      "match_note": "Exact part number"
+      "match_note": "Exact part number."
     },
     {
       "line": 11,
@@ -145,7 +146,7 @@
       "po_unit_price": 109,
       "sku": "FT-CAB-CAT6INT",
       "match_confidence": "high",
-      "match_note": "Internal LSZH grey CAT6, 305m box"
+      "match_note": "Description matches CAT6 LSZH grey cable in 305m boxes."
     },
     {
       "line": 12,
@@ -154,8 +155,8 @@
       "quantity": 6,
       "po_unit_price": 25,
       "sku": "FT-CAB-6C100",
-      "match_confidence": "high",
-      "match_note": "6-core alarm cable, 100m"
+      "match_confidence": "medium",
+      "match_note": "Matched standard 100m 6-core alarm cable; white colour assumed."
     },
     {
       "line": 13,
@@ -165,7 +166,7 @@
       "po_unit_price": 185,
       "sku": null,
       "match_confidence": "none",
-      "match_note": "Abloy electric locks are not in the Fortus catalogue"
+      "match_note": "No Abloy EL560 electric lock in the catalogue; maglocks are not equivalent."
     }
   ],
   "totals": {
@@ -177,19 +178,23 @@
   "flags": [
     {
       "severity": "warning",
-      "message": "Printed subtotal £7,582.00 doesn't match the sum of the lines, £7,528.00 (£54.00 out — looks like a transposed digit)."
+      "message": "The 13 lines sum to £7,528.00, £54.00 below the printed subtotal of £7,582.00; verify totals before booking."
     },
     {
       "severity": "warning",
-      "message": "Line 13, Abloy EL560 electric lock (2 x £185.00), isn't in the Fortus catalogue — source it or tell the customer."
+      "message": "At 20% VAT, the line sum gives tax of £1,505.60 and a total of £9,033.60, versus printed amounts of £1,516.40 and £9,098.40."
+    },
+    {
+      "severity": "warning",
+      "message": "Line 13 orders 2 Abloy EL560 locks with no catalogue match; source the exact product because substitutions require written buyer approval."
+    },
+    {
+      "severity": "warning",
+      "message": "Schedule deliveries for lines 1–6 by 24 November 2026 and lines 7–13 by 8 December 2026, within 08:00–16:00 Monday–Friday, marking the phase on each delivery note."
     },
     {
       "severity": "info",
-      "message": "Phased delivery: lines 1–6 by 24 Nov and lines 7–13 by 8 Dec; mark the phase on delivery notes."
-    },
-    {
-      "severity": "info",
-      "message": "All other unit prices match list prices."
+      "message": "Line 7 is 15 packs of 10 keyfobs and line 8 is 10 packs of 10 cards, not 15 and 10 individual units."
     }
   ]
 }

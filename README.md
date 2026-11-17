@@ -10,18 +10,57 @@ A single-page demo for a non-technical audience. Someone drops in a customer pur
 
 The reviewer can change a quantity or product and then press **Create sales order**. That produces a mock sales order number with a JSON/CSV download, to show the ERP hand-off.
 
-It is plain HTML/CSS/JS with no build step and no server, so it runs on GitHub Pages as-is.
+The site is plain HTML/CSS/JS on GitHub Pages. AI extraction uses **OpenAI** (`gpt-6.1-sol` by default) through a small **Cloudflare Worker** that keeps the OpenAI key out of the browser.
+
+```
+Browser (GitHub Pages) ──passcode + PDF──▶ Cloudflare Worker ──OPENAI_API_KEY──▶ OpenAI Responses API
+         ◀──────────── streamed JSON (server-sent events) ─────────────
+```
 
 ## Two modes
 
 | Mode | When | What happens |
 |---|---|---|
-| **Demo mode** (default) | No API key set | The six sample orders play back recorded results with the same "filling in live" animation. Works offline. Uploading your own file asks for a key. |
-| **Live AI** | Anthropic API key added in ⚙ Settings | Any PDF or image is sent straight from the browser to Claude (`claude-opus-5-5` by default; Sonnet 5.5 and Haiku 5.5 can be picked in Settings). The result streams into the form as it is read. |
+| **Demo mode** (default) | No passcode entered | The six sample orders play back recorded results with the same "filling in live" animation. Works offline. Uploading your own file asks for the passcode. |
+| **Live AI** | Demo passcode entered in ⚙ Settings | Any PDF or image goes to the Worker, which sends it to OpenAI with the fixed prompt and JSON schema and streams the result back into the form. |
 
-The key is kept in the browser's `localStorage` and is only sent to `api.anthropic.com`. Use a key with a low spend limit, and remove it (Settings → Remove key) on shared machines. Settings also has a "play samples from recordings" switch: uploads go live while the six samples stay instant.
+The browser only stores the passcode. The OpenAI key is a secret on the Worker. The Worker also rejects any site not listed in `ALLOWED_ORIGINS`. Settings has a "play samples from recordings" switch so uploads go live while the six samples stay instant.
 
-> **Before a real demo:** the recorded results in `samples/results/` were written by hand to match each sample. They were **not** captured from a live run. To replace them with genuine model output, add a key, run each sample, click **Download data** and save the file over `samples/results/<sample-id>.json`.
+## Setting up the Worker (one-off)
+
+You need a free Cloudflare account and Node.js.
+
+1. Put the key and passcode in `worker/.dev.vars`. This file is git-ignored and never leaves your machine:
+   ```
+   OPENAI_API_KEY=sk-...
+   DEMO_PASSCODE=pick-something
+   ```
+2. Test locally:
+   ```bash
+   cd worker && npm install && npm run dev                      # Worker on http://localhost:8787
+   python3 -m http.server 8765                                  # site, run from the repo root
+   ```
+   Open http://localhost:8765, then ⚙ → enter the passcode → Advanced → proxy `http://localhost:8787`.
+3. Deploy and upload the secrets:
+   ```bash
+   cd worker
+   npx wrangler login
+   npx wrangler deploy                    # prints https://po-to-order-demo-proxy.<you>.workers.dev
+   npx wrangler secret bulk .dev.vars     # uploads OPENAI_API_KEY and DEMO_PASSCODE
+   ```
+4. Put the Worker address in `js/config.js` (`DEFAULT_PROXY_URL`) and push. Presenters then only need the passcode.
+
+Settings live in `worker/wrangler.toml`: `OPENAI_MODEL`, `REASONING_EFFORT` (default `low`, for speed) and `ALLOWED_ORIGINS`. Set a monthly spend limit on the OpenAI project too.
+
+## Re-recording the sample results
+
+With the Worker running locally (`npm run dev`), run:
+
+```bash
+node tools/record-results.mjs            # all six, or pass part of a name: node tools/record-results.mjs kelly
+```
+
+This sends each sample PDF through the real model and overwrites `samples/results/*.json`, so demo mode replays genuine output.
 
 ## Presenter talk track
 
@@ -36,19 +75,7 @@ Then drop in one of the audience's own POs (live mode). This usually lands best.
 
 ## Hosting on GitHub Pages
 
-```bash
-git init && git add . && git commit -m "PO to sales order demo"
-gh repo create po-to-order-demo --public --source . --push
-gh api -X POST repos/{owner}/po-to-order-demo/pages -f "source[branch]=main" -f "source[path]=/"
-```
-
-The site appears at `https://<owner>.github.io/po-to-order-demo/` after a minute or so. A private repo also works if your GitHub plan supports Pages for private repos.
-
-To run it locally, serve the folder over HTTP (ES modules don't load from `file://`):
-
-```bash
-python3 -m http.server 8765
-```
+The repo is published from `main` (root). Push to update; the site rebuilds in about a minute. To run the site locally, serve it over HTTP (ES modules don't load from `file://`): `python3 -m http.server 8765`.
 
 ## Project layout
 
@@ -56,18 +83,22 @@ python3 -m http.server 8765
 index.html               page shell
 css/styles.css           styling
 js/app.js                UI: samples, upload, live rendering, review, create order
-js/extract.js            Claude call (streaming + JSON schema), replay of recorded results
+js/extract.js            calls the Worker, reads the SSE stream, replays recorded results
+js/prompt.js             extraction prompt + strict JSON schema (shared with the Worker)
+js/config.js             default Worker address
 js/data.js               demo catalogue (50 SKUs), customer accounts, branches
-js/vendor/anthropic-sdk.js  official @anthropic-ai/sdk (v1.9.0) bundled for the browser
+js/vendor/partial-json.js   partial-json (MIT) for rendering JSON while it streams
+worker/                  Cloudflare Worker proxy (holds the OpenAI key)
 samples/*.pdf            six sample purchase orders
 samples/pages/*.jpg      page images for the viewer and sample cards
 samples/results/*.json   recorded extraction results for demo mode
 tools/generate_samples.py  regenerates the sample PDFs (reportlab + pillow)
+tools/record-results.mjs   re-records samples/results from the real model
 ```
 
 ## Notes
 
 - **All data is fictional.** The catalogue, prices, SKUs and customer accounts are illustrative, not Fortus data. The real product range and brands (Hikvision, Paxton, Pyronix, Hochiki, Advanced, Roger Technology) were used only to make the samples feel familiar. Phone numbers use reserved drama ranges.
-- **How the extraction works:** one Claude Messages API call. The PDF goes in as a `document` block, the catalogue, customers and branches go in the (cached) system prompt, and a strict JSON schema is set via `output_config.format`. On Opus/Sonnet, server-side refusal fallback (`fallbacks: "default"`) is turned on.
-- **Speed:** effort is set to `low` to keep live runs short for a demo. Raise it in `js/extract.js` if accuracy matters more than speed.
-- **In production** this would sit behind a small server (so no API key in the browser), pull the catalogue and accounts from the ERP, and post the order to the ERP instead of downloading it.
+- **How the extraction works:** one OpenAI Responses API call from the Worker. The PDF goes in as an `input_file` part, the catalogue, customers and branches go in the system message, and output is constrained by a strict `json_schema` (`text.format`). `store: false` is set, so OpenAI doesn't keep the response.
+- **Speed vs accuracy:** `REASONING_EFFORT` is `low` to keep live runs short. Use `medium` or a bigger model (`gpt-6-astra`) if accuracy matters more.
+- **In production** the Worker would sit behind real sign-in rather than a shared passcode, pull the catalogue and accounts from the ERP, and post the order to the ERP instead of downloading it.

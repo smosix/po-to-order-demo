@@ -1,5 +1,5 @@
 {
-  "summary": "Northpoint Fire Protection are ordering a Hochiki / Advanced fire alarm package (145 items including an MxPro 5 panel) for delivery to their Trafford Park site w/c 23 Nov.",
+  "summary": "Northpoint Fire Protection are ordering fire alarm equipment for Trafford Park Logistics Hub Unit 4, for delivery during the week commencing 23 November 2026.",
   "document": {
     "kind": "purchase_order",
     "language": "English"
@@ -32,9 +32,9 @@
         "Trafford Park, Manchester"
       ],
       "postcode": "M17 1PJ",
-      "country": "United Kingdom"
+      "country": "UK"
     },
-    "instructions": "Site delivery w/c 23/11. No deliveries before 8am. Tail-lift vehicle required. Ring site contact Dave Hughes (07700 900123) 30 mins before arrival."
+    "instructions": "Deliver w/c 23/11/2026; no deliveries before 8am; tail-lift vehicle required; ring site 30 minutes before arrival; site contact Dave Hughes, 07700 900123; deliver complete unless agreed in advance."
   },
   "lines": [
     {
@@ -45,7 +45,7 @@
       "po_unit_price": 36.5,
       "sku": "FT-HOC-ALNEN",
       "match_confidence": "high",
-      "match_note": "Hochiki ESP optical smoke detector = ALN-EN"
+      "match_note": "Hochiki ESP optical detector matches ALN-EN."
     },
     {
       "line": 2,
@@ -55,7 +55,7 @@
       "po_unit_price": 6.5,
       "sku": "FT-HOC-YBNR3",
       "match_confidence": "high",
-      "match_note": "Standard base for ESP detectors"
+      "match_note": "Standard base for the Hochiki ESP detectors ordered above."
     },
     {
       "line": 3,
@@ -65,7 +65,7 @@
       "po_unit_price": 36,
       "sku": "FT-HOC-ATJEN",
       "match_confidence": "high",
-      "match_note": "Hochiki ESP heat detector = ATJ-EN"
+      "match_note": "Hochiki ESP heat detector matches ATJ-EN."
     },
     {
       "line": 4,
@@ -75,7 +75,7 @@
       "po_unit_price": 33,
       "sku": "FT-HOC-HCPE",
       "match_confidence": "high",
-      "match_note": "Addressable manual call point, red"
+      "match_note": "Red addressable manual call point for the Hochiki ESP system."
     },
     {
       "line": 5,
@@ -84,8 +84,8 @@
       "quantity": 20,
       "po_unit_price": 42,
       "sku": "FT-HOC-CHQBS",
-      "match_confidence": "medium",
-      "match_note": "Assumed Hochiki ESP sounder base to suit the detectors"
+      "match_confidence": "high",
+      "match_note": "Hochiki ESP sounder base matches CHQ-BS."
     },
     {
       "line": 6,
@@ -95,7 +95,7 @@
       "po_unit_price": null,
       "sku": "FT-ADV-MX5401",
       "match_confidence": "high",
-      "match_note": "Advanced MxPro 5, 1 loop"
+      "match_note": "MxPro 5 single-loop panel matches Advanced MX-5401; price refers to quote."
     },
     {
       "line": 7,
@@ -105,7 +105,7 @@
       "po_unit_price": 109,
       "sku": "FT-CAB-FP200-15",
       "match_confidence": "high",
-      "match_note": "FP200 Gold 1.5mm 2-core red, 100m"
+      "match_note": "Matches FP200 red 1.5mm 2-core cable in 100m drums."
     },
     {
       "line": 8,
@@ -115,35 +115,43 @@
       "po_unit_price": 16,
       "sku": "FT-BAT-12V7",
       "match_confidence": "high",
-      "match_note": "12V 7Ah SLA battery"
+      "match_note": "Matches 12V 7Ah standby battery."
     }
   ],
   "totals": {
     "po_subtotal": 4420,
     "po_tax": null,
     "po_total": null,
-    "tax_rate_percent": 20
+    "tax_rate_percent": null
   },
   "flags": [
     {
       "severity": "warning",
-      "message": "The MxPro 5 panel has no price on the PO (\"as quoted\" Q-MAN-55210) — confirm the quoted price; list is £1,060.00."
+      "message": "Line 1 price of £36.50 is 3.95% below the £38.00 list price; confirm the quoted discount."
     },
     {
       "severity": "warning",
-      "message": "PO goods total of £4,420.00 excludes the panel; with the panel at list price the order is £5,480.00 ex VAT."
+      "message": "Line 6 has no numeric price; retrieve the panel price from quote Q-MAN-55210 before booking."
     },
     {
       "severity": "warning",
-      "message": "Site delivery rules: no deliveries before 8am, tail-lift vehicle required, ring Dave Hughes 30 mins before arrival."
+      "message": "The £4,420.00 goods total equals the 7 priced lines only and excludes the unpriced panel on line 6; confirm the final subtotal."
+    },
+    {
+      "severity": "warning",
+      "message": "Arrange a tail-lift delivery after 8am with a site call 30 minutes before arrival, and deliver all 8 lines complete unless agreed otherwise."
     },
     {
       "severity": "info",
-      "message": "Optical heads are £36.50 vs £38.00 list (3.9% below) — likely the quoted price."
+      "message": "Delivery is requested during the week commencing 23 November 2026, not specifically on 23 November."
     },
     {
       "severity": "info",
-      "message": "\"Sounder bases\" matched to Hochiki CHQ-BS with medium confidence — confirm the type."
+      "message": "VAT is to be added at the standard rate, but no numeric VAT rate or amount is printed."
+    },
+    {
+      "severity": "info",
+      "message": "Include PO number NFP/0876 on invoices to avoid rejection."
     }
   ]
 }
