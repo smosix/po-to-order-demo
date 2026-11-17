@@ -1,0 +1,195 @@
+{
+  "summary": "Meridian Access Solutions are ordering a Paxton Net2 access control package (13 lines) for Aston Science Park Block C, in two delivery phases from 24 Nov.",
+  "document": {
+    "kind": "purchase_order",
+    "language": "English"
+  },
+  "customer": {
+    "name": "Meridian Access Solutions Ltd",
+    "account": "C30112",
+    "account_confidence": "high",
+    "contact_name": "Raj Patel",
+    "contact_email": "procurement@meridianaccess.co.uk",
+    "contact_phone": "0121 496 0187",
+    "vat_number": null
+  },
+  "order": {
+    "po_number": "MAS-10452",
+    "po_date": "2026-11-09",
+    "required_date": "2026-11-24",
+    "quote_reference": "Q-BHM-30981",
+    "job_reference": "Aston Science Park – Block C access control",
+    "currency": "GBP",
+    "payment_terms": "30 days EOM"
+  },
+  "fulfilment": {
+    "method": "delivery",
+    "branch": "BHM",
+    "deliver_to": {
+      "name": "Meridian Access Solutions Ltd",
+      "address_lines": [
+        "Unit 12, Heartlands Business Park",
+        "Birmingham"
+      ],
+      "postcode": "B7 5QR",
+      "country": "United Kingdom"
+    },
+    "instructions": "Phase 1 (lines 1–6) by 24/11/2026; Phase 2 (lines 7–13) by 08/12/2026. Part deliveries accepted — mark the phase on each delivery note. Deliveries 08:00–16:00 Mon–Fri."
+  },
+  "lines": [
+    {
+      "line": 1,
+      "customer_ref": "682-531",
+      "description": "Paxton Net2 Plus 1 door controller, boxed PSU",
+      "quantity": 8,
+      "po_unit_price": 329,
+      "sku": "FT-PAX-682531",
+      "match_confidence": "high",
+      "match_note": "Exact part number"
+    },
+    {
+      "line": 2,
+      "customer_ref": "P75",
+      "description": "Paxton P75 proximity reader",
+      "quantity": 12,
+      "po_unit_price": 75,
+      "sku": "FT-PAX-P75",
+      "match_confidence": "high",
+      "match_note": "Exact part number"
+    },
+    {
+      "line": 3,
+      "customer_ref": "KP75",
+      "description": "Paxton KP75 keypad/prox reader",
+      "quantity": 4,
+      "po_unit_price": 99,
+      "sku": "FT-PAX-KP75",
+      "match_confidence": "high",
+      "match_note": "Exact part number"
+    },
+    {
+      "line": 4,
+      "customer_ref": "ML600-M",
+      "description": "Maglock 600lb monitored c/w bracket",
+      "quantity": 8,
+      "po_unit_price": 49,
+      "sku": "FT-ACC-MAG600M",
+      "match_confidence": "high",
+      "match_note": "Exact part number"
+    },
+    {
+      "line": 5,
+      "customer_ref": "BG-GRN-DP",
+      "description": "Green break glass double pole",
+      "quantity": 8,
+      "po_unit_price": 16,
+      "sku": "FT-ACC-BGGRN",
+      "match_confidence": "high",
+      "match_note": "Exact part number"
+    },
+    {
+      "line": 6,
+      "customer_ref": "NT-EXIT",
+      "description": "No-touch exit button s/s",
+      "quantity": 8,
+      "po_unit_price": 24,
+      "sku": "FT-ACC-NTEXIT",
+      "match_confidence": "high",
+      "match_note": "Exact part number"
+    },
+    {
+      "line": 7,
+      "customer_ref": "692-052",
+      "description": "Paxton Net2 keyfobs (packs of 10)",
+      "quantity": 15,
+      "po_unit_price": 33,
+      "sku": "FT-PAX-692052",
+      "match_confidence": "high",
+      "match_note": "Exact part number"
+    },
+    {
+      "line": 8,
+      "customer_ref": "692-448",
+      "description": "Paxton Net2 ISO cards (packs of 10)",
+      "quantity": 10,
+      "po_unit_price": 25,
+      "sku": "FT-PAX-ISO10",
+      "match_confidence": "high",
+      "match_note": "Exact part number"
+    },
+    {
+      "line": 9,
+      "customer_ref": "NET2PRO",
+      "description": "Net2 Pro software licence",
+      "quantity": 1,
+      "po_unit_price": 169,
+      "sku": "FT-PAX-NET2PRO",
+      "match_confidence": "high",
+      "match_note": "Exact part number"
+    },
+    {
+      "line": 10,
+      "customer_ref": "337-110",
+      "description": "Net2 Entry standard kit",
+      "quantity": 2,
+      "po_unit_price": 509,
+      "sku": "FT-PAX-ENTRYKIT",
+      "match_confidence": "high",
+      "match_note": "Exact part number"
+    },
+    {
+      "line": 11,
+      "customer_ref": "CAT6-LSZH",
+      "description": "CAT6 LSZH grey 305m",
+      "quantity": 4,
+      "po_unit_price": 109,
+      "sku": "FT-CAB-CAT6INT",
+      "match_confidence": "high",
+      "match_note": "Internal LSZH grey CAT6, 305m box"
+    },
+    {
+      "line": 12,
+      "customer_ref": "6C-100",
+      "description": "6 core alarm cable 100m",
+      "quantity": 6,
+      "po_unit_price": 25,
+      "sku": "FT-CAB-6C100",
+      "match_confidence": "high",
+      "match_note": "6-core alarm cable, 100m"
+    },
+    {
+      "line": 13,
+      "customer_ref": "EL560",
+      "description": "Abloy EL560 electric lock (fire exit doors)",
+      "quantity": 2,
+      "po_unit_price": 185,
+      "sku": null,
+      "match_confidence": "none",
+      "match_note": "Abloy electric locks are not in the Fortus catalogue"
+    }
+  ],
+  "totals": {
+    "po_subtotal": 7582,
+    "po_tax": 1516.4,
+    "po_total": 9098.4,
+    "tax_rate_percent": 20
+  },
+  "flags": [
+    {
+      "severity": "warning",
+      "message": "Printed subtotal £7,582.00 doesn't match the sum of the lines, £7,528.00 (£54.00 out — looks like a transposed digit)."
+    },
+    {
+      "severity": "warning",
+      "message": "Line 13, Abloy EL560 electric lock (2 x £185.00), isn't in the Fortus catalogue — source it or tell the customer."
+    },
+    {
+      "severity": "info",
+      "message": "Phased delivery: lines 1–6 by 24 Nov and lines 7–13 by 8 Dec; mark the phase on delivery notes."
+    },
+    {
+      "severity": "info",
+      "message": "All other unit prices match list prices."
+    }
+  ]
+}

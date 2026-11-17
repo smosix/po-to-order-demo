@@ -1,0 +1,149 @@
+{
+  "summary": "Northpoint Fire Protection are ordering a Hochiki / Advanced fire alarm package (145 items including an MxPro 5 panel) for delivery to their Trafford Park site w/c 23 Nov.",
+  "document": {
+    "kind": "purchase_order",
+    "language": "English"
+  },
+  "customer": {
+    "name": "Northpoint Fire Protection Ltd",
+    "account": "C20877",
+    "account_confidence": "high",
+    "contact_name": "Lisa Chen",
+    "contact_email": "lisa.chen@northpointfire.co.uk",
+    "contact_phone": "0161 496 0877",
+    "vat_number": "GB 287 4410 93"
+  },
+  "order": {
+    "po_number": "NFP/0876",
+    "po_date": "2026-11-10",
+    "required_date": "2026-11-23",
+    "quote_reference": "Q-MAN-55210",
+    "job_reference": "TPLH Unit 4 – L2 fire alarm",
+    "currency": "GBP",
+    "payment_terms": null
+  },
+  "fulfilment": {
+    "method": "delivery",
+    "branch": "MAN",
+    "deliver_to": {
+      "name": "Trafford Park Logistics Hub – Unit 4",
+      "address_lines": [
+        "Westinghouse Road",
+        "Trafford Park, Manchester"
+      ],
+      "postcode": "M17 1PJ",
+      "country": "United Kingdom"
+    },
+    "instructions": "Site delivery w/c 23/11. No deliveries before 8am. Tail-lift vehicle required. Ring site contact Dave Hughes (07700 900123) 30 mins before arrival."
+  },
+  "lines": [
+    {
+      "line": 1,
+      "customer_ref": "NFP-ESP-OPT",
+      "description": "Hochiki ESP optical heads",
+      "quantity": 48,
+      "po_unit_price": 36.5,
+      "sku": "FT-HOC-ALNEN",
+      "match_confidence": "high",
+      "match_note": "Hochiki ESP optical smoke detector = ALN-EN"
+    },
+    {
+      "line": 2,
+      "customer_ref": "NFP-BASE",
+      "description": "Std bases to suit above",
+      "quantity": 48,
+      "po_unit_price": 6.5,
+      "sku": "FT-HOC-YBNR3",
+      "match_confidence": "high",
+      "match_note": "Standard base for ESP detectors"
+    },
+    {
+      "line": 3,
+      "customer_ref": "NFP-ESP-HEAT",
+      "description": "ESP heat heads (kitchen / plant rm)",
+      "quantity": 6,
+      "po_unit_price": 36,
+      "sku": "FT-HOC-ATJEN",
+      "match_confidence": "high",
+      "match_note": "Hochiki ESP heat detector = ATJ-EN"
+    },
+    {
+      "line": 4,
+      "customer_ref": "NFP-MCP",
+      "description": "Addressable MCPs red",
+      "quantity": 12,
+      "po_unit_price": 33,
+      "sku": "FT-HOC-HCPE",
+      "match_confidence": "high",
+      "match_note": "Addressable manual call point, red"
+    },
+    {
+      "line": 5,
+      "customer_ref": "NFP-SNDR",
+      "description": "Sounder bases",
+      "quantity": 20,
+      "po_unit_price": 42,
+      "sku": "FT-HOC-CHQBS",
+      "match_confidence": "medium",
+      "match_note": "Assumed Hochiki ESP sounder base to suit the detectors"
+    },
+    {
+      "line": 6,
+      "customer_ref": "NFP-PANEL",
+      "description": "MxPro 5 single loop panel",
+      "quantity": 1,
+      "po_unit_price": null,
+      "sku": "FT-ADV-MX5401",
+      "match_confidence": "high",
+      "match_note": "Advanced MxPro 5, 1 loop"
+    },
+    {
+      "line": 7,
+      "customer_ref": "NFP-FP200",
+      "description": "FP200 red 1.5 2c x 100m drums",
+      "quantity": 8,
+      "po_unit_price": 109,
+      "sku": "FT-CAB-FP200-15",
+      "match_confidence": "high",
+      "match_note": "FP200 Gold 1.5mm 2-core red, 100m"
+    },
+    {
+      "line": 8,
+      "customer_ref": "NFP-BATT",
+      "description": "Batts 12v 7Ah (panel standby)",
+      "quantity": 2,
+      "po_unit_price": 16,
+      "sku": "FT-BAT-12V7",
+      "match_confidence": "high",
+      "match_note": "12V 7Ah SLA battery"
+    }
+  ],
+  "totals": {
+    "po_subtotal": 4420,
+    "po_tax": null,
+    "po_total": null,
+    "tax_rate_percent": 20
+  },
+  "flags": [
+    {
+      "severity": "warning",
+      "message": "The MxPro 5 panel has no price on the PO (\"as quoted\" Q-MAN-55210) — confirm the quoted price; list is £1,060.00."
+    },
+    {
+      "severity": "warning",
+      "message": "PO goods total of £4,420.00 excludes the panel; with the panel at list price the order is £5,480.00 ex VAT."
+    },
+    {
+      "severity": "warning",
+      "message": "Site delivery rules: no deliveries before 8am, tail-lift vehicle required, ring Dave Hughes 30 mins before arrival."
+    },
+    {
+      "severity": "info",
+      "message": "Optical heads are £36.50 vs £38.00 list (3.9% below) — likely the quoted price."
+    },
+    {
+      "severity": "info",
+      "message": "\"Sounder bases\" matched to Hochiki CHQ-BS with medium confidence — confirm the type."
+    }
+  ]
+}

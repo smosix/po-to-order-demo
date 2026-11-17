@@ -1,0 +1,125 @@
+{
+  "summary": "Kingdom Gates want a Roger brushless swing-gate kit with accessories (12 items) for a Kenmare job, delivered to their Tralee yard by Thursday 19 Nov.",
+  "document": {
+    "kind": "email_order",
+    "language": "English"
+  },
+  "customer": {
+    "name": "Kingdom Gates & Automation",
+    "account": "C10390",
+    "account_confidence": "high",
+    "contact_name": "Mike Doyle",
+    "contact_email": "mike@kingdomgates.ie",
+    "contact_phone": "087 555 0164",
+    "vat_number": null
+  },
+  "order": {
+    "po_number": "KGA-2291",
+    "po_date": "2026-11-16",
+    "required_date": "2026-11-19",
+    "quote_reference": null,
+    "job_reference": "Kenmare job",
+    "currency": "EUR",
+    "payment_terms": null
+  },
+  "fulfilment": {
+    "method": "delivery",
+    "branch": "CRK",
+    "deliver_to": {
+      "name": "Kingdom Gates & Automation",
+      "address_lines": [
+        "Unit 3, Clash Industrial Estate",
+        "Tralee, Co. Kerry"
+      ],
+      "postcode": "V92 T6K2",
+      "country": "Ireland"
+    },
+    "instructions": "Deliver to the Tralee yard. If arriving after 4pm, ring Mike on 087 555 0164 — the gate will be locked."
+  },
+  "lines": [
+    {
+      "line": 1,
+      "customer_ref": null,
+      "description": "Roger brushless swing kit (2 leaves, about 2.5m each)",
+      "quantity": 1,
+      "po_unit_price": null,
+      "sku": "FT-ROG-BH30KIT",
+      "match_confidence": "high",
+      "match_note": "Brushless swing kit, 2 leaves up to 3m"
+    },
+    {
+      "line": 2,
+      "customer_ref": null,
+      "description": "Pair of photocells",
+      "quantity": 2,
+      "po_unit_price": null,
+      "sku": "FT-ROG-F4ES",
+      "match_confidence": "high",
+      "match_note": "Roger photocells, pair"
+    },
+    {
+      "line": 3,
+      "customer_ref": null,
+      "description": "Remotes (the 2 button ones)",
+      "quantity": 6,
+      "po_unit_price": null,
+      "sku": "FT-ROG-E80TX52R",
+      "match_confidence": "high",
+      "match_note": "Roger 2-channel remote"
+    },
+    {
+      "line": 4,
+      "customer_ref": null,
+      "description": "Flashing light",
+      "quantity": 1,
+      "po_unit_price": null,
+      "sku": "FT-ROG-FIFTHY",
+      "match_confidence": "high",
+      "match_note": "Roger LED flashing beacon"
+    },
+    {
+      "line": 5,
+      "customer_ref": null,
+      "description": "Key switch",
+      "quantity": 1,
+      "po_unit_price": null,
+      "sku": "FT-ROG-H85TDS",
+      "match_confidence": "high",
+      "match_note": "Roger key selector switch"
+    },
+    {
+      "line": 6,
+      "customer_ref": null,
+      "description": "Box of the outdoor cat6",
+      "quantity": 1,
+      "po_unit_price": null,
+      "sku": "FT-CAB-CAT6EXT",
+      "match_confidence": "high",
+      "match_note": "External CAT6, 305m box"
+    }
+  ],
+  "totals": {
+    "po_subtotal": null,
+    "po_tax": null,
+    "po_total": null,
+    "tax_rate_percent": null
+  },
+  "flags": [
+    {
+      "severity": "warning",
+      "message": "No prices in the email — list prices applied (€1,764.00 ex VAT)."
+    },
+    {
+      "severity": "info",
+      "message": "Price request only: 2 x 12V 7Ah batteries — not added to the order; send a quote (list €19.00 each)."
+    },
+    {
+      "severity": "info",
+      "message": "\"For Thursday\" read as Thursday 19 Nov 2026 (email sent Monday 16 Nov)."
+    },
+    {
+      "severity": "info",
+      "message": "\"Usual account\" matched to Kingdom Gates & Automation (C10390) by name and email address."
+    }
+  ]
+}

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PO to Sales Order with AI · Demo for Fortus</title>
+  <meta name="description" content="Upload a customer purchase order and AI extracts everything needed to book the sales order." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230B2545'/><path d='M9 17l4 4 10-10' stroke='%2350E3C2' stroke-width='3.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="./" aria-label="Home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="currentColor"/><path d="M9 17l4 4 10-10" stroke="#50E3C2" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="brand-text">
+        <strong>Order Capture AI</strong>
+        <small>Demo prepared for Fortus</small>
+      </span>
+    </a>
+    <div class="topbar-right">
+      <button id="modePill" class="mode-pill" type="button" title="Change AI settings"></button>
+      <button id="settingsBtn" class="icon-btn" type="button" aria-label="Settings">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- HOME -->
+  <main id="home" class="view">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Sales order entry, automated</p>
+        <h1>From customer PO to sales order <span class="hl">in seconds</span>.</h1>
+        <p class="lede">Drop in any purchase order — a PDF, a scan, a forwarded email or a handwritten order pad. AI reads it, matches every line to the catalogue, and flags anything a person should check before the order is booked.</p>
+        <ul class="ticks">
+          <li>Works with any layout, no templates to set up</li>
+          <li>Matches customer descriptions to the right stock codes</li>
+          <li>Catches price differences, totals that don't add up and missing info</li>
+        </ul>
+      </div>
+      <label id="dropzone" class="dropzone" tabindex="0">
+        <input id="fileInput" type="file" accept="application/pdf,image/png,image/jpeg,image/webp" hidden />
+        <div class="dz-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48" width="56" height="56" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M28 6H14a4 4 0 0 0-4 4v28a4 4 0 0 0 4 4h20a4 4 0 0 0 4-4V16z"/><path d="M28 6v10h10"/><path d="M24 34V22"/><path d="M19 27l5-5 5 5"/></svg>
+        </div>
+        <strong>Drop a purchase order here</strong>
+        <span>or <u>browse your files</u> · PDF, PNG or JPG</span>
+      </label>
+    </section>
+
+    <section class="samples">
+      <div class="section-head">
+        <h2>Or try one of these real-world style orders</h2>
+        <p>Six different customers, six different formats. All companies and figures are fictional.</p>
+      </div>
+      <div id="sampleGrid" class="sample-grid"></div>
+    </section>
+
+    <section class="how">
+      <div class="how-step"><span>1</span><h3>Upload</h3><p>Email attachment, scan or photo. Any supplier format, any language.</p></div>
+      <div class="how-step"><span>2</span><h3>AI reads &amp; matches</h3><p>Customer, PO number, dates, delivery details and every line matched to a stock code.</p></div>
+      <div class="how-step"><span>3</span><h3>Review &amp; book</h3><p>A person checks the highlighted items, adjusts if needed, and books the order.</p></div>
+    </section>
+    <footer class="foot">Illustrative demo. Catalogue, prices and customer accounts are sample data, not Fortus data.</footer>
+  </main>
+
+  <!-- WORKSPACE -->
+  <main id="work" class="view hidden">
+    <div class="work-grid">
+      <section class="doc-pane">
+        <div class="pane-head">
+          <button id="backBtn" class="ghost-btn" type="button">← New order</button>
+          <span id="docName" class="doc-name"></span>
+        </div>
+        <div id="docViewer" class="doc-viewer"></div>
+      </section>
+
+      <section class="order-pane">
+        <div class="pane-head">
+          <h2>Sales order <span class="muted">draft</span></h2>
+          <span id="timer" class="timer"></span>
+        </div>
+        <ol id="steps" class="steps">
+          <li data-step="reading">Reading document</li>
+          <li data-step="customer">Customer</li>
+          <li data-step="order">Order details</li>
+          <li data-step="lines">Line items</li>
+          <li data-step="checks">Checks</li>
+        </ol>
+        <div id="orderBody" class="order-body"></div>
+      </section>
+    </div>
+  </main>
+
+  <!-- SETTINGS -->
+  <dialog id="settingsDlg" class="dlg">
+    <form id="settingsForm">
+      <h2>AI settings</h2>
+      <p class="muted">With no API key, the six sample orders play back results recorded earlier, so the demo works offline. Add an Anthropic API key to read any document live.</p>
+      <label class="field">
+        <span>Anthropic API key</span>
+        <input id="apiKey" type="password" placeholder="sk-ant-…" autocomplete="off" spellcheck="false" />
+        <small>Stored only in this browser (localStorage) and sent only to api.anthropic.com. Use a key with a spend limit.</small>
+      </label>
+      <label class="field">
+        <span>Model</span>
+        <select id="modelSel"></select>
+      </label>
+      <label class="check">
+        <input id="replaySamples" type="checkbox" />
+        <span>Play the six sample orders from recordings even when a key is set (instant, no network needed)</span>
+      </label>
+      <div class="dlg-actions">
+        <button type="button" id="clearKey" class="ghost-btn">Remove key</button>
+        <span class="spacer"></span>
+        <button type="button" id="cancelSettings" class="ghost-btn">Cancel</button>
+        <button type="submit" id="saveSettings" class="primary-btn">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- ORDER CREATED -->
+  <dialog id="doneDlg" class="dlg done-dlg"></dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

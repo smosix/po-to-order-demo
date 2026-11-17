@@ -1,0 +1,128 @@
+{
+  "summary": "Brightwater Security Systems are ordering 30 CCTV items (cameras, a 16-channel NVR, drives and cable) for their Clontarf Medical Centre job, needed by 20 Nov.",
+  "document": {
+    "kind": "purchase_order",
+    "language": "English"
+  },
+  "customer": {
+    "name": "Brightwater Security Systems Ltd",
+    "account": "C10421",
+    "account_confidence": "high",
+    "contact_name": "Aoife Brennan",
+    "contact_email": "aoife.brennan@brightwatersecurity.ie",
+    "contact_phone": "+353 1 555 0142",
+    "vat_number": "IE 3345678QH"
+  },
+  "order": {
+    "po_number": "BWS-PO-24117",
+    "po_date": "2026-11-12",
+    "required_date": "2026-11-20",
+    "quote_reference": null,
+    "job_reference": "Clontarf Medical Centre – CCTV upgrade",
+    "currency": "EUR",
+    "payment_terms": "30 days end of month"
+  },
+  "fulfilment": {
+    "method": "delivery",
+    "branch": "DUB",
+    "deliver_to": {
+      "name": "Brightwater Security Systems Ltd",
+      "address_lines": [
+        "Unit 7, Ballymount Business Park",
+        "Ballymount Road Upper",
+        "Dublin 12"
+      ],
+      "postcode": "D12 X9K4",
+      "country": "Ireland"
+    },
+    "instructions": "Goods-in open 08:00–16:30, Mon–Fri. Quote PO number on all delivery dockets."
+  },
+  "lines": [
+    {
+      "line": 1,
+      "customer_ref": "DS-2CD2347G2-LU",
+      "description": "Hikvision 4MP ColorVu Turret 2.8mm c/w mic",
+      "quantity": 10,
+      "po_unit_price": 139,
+      "sku": "FT-HIK-2347G2LU",
+      "match_confidence": "high",
+      "match_note": "Exact part number"
+    },
+    {
+      "line": 2,
+      "customer_ref": "DS-2CD2T47G2-L",
+      "description": "Hikvision 4MP ColorVu Bullet 4mm",
+      "quantity": 4,
+      "po_unit_price": 149,
+      "sku": "FT-HIK-2T47G2L",
+      "match_confidence": "high",
+      "match_note": "Exact part number"
+    },
+    {
+      "line": 3,
+      "customer_ref": "DS-1280ZJ-XS",
+      "description": "Junction box to suit turret",
+      "quantity": 10,
+      "po_unit_price": 12,
+      "sku": "FT-HIK-1280ZJXS",
+      "match_confidence": "high",
+      "match_note": "Exact part number"
+    },
+    {
+      "line": 4,
+      "customer_ref": "DS-7616NXI-K2/16P",
+      "description": "Hikvision 16ch AcuSense NVR 16 x PoE",
+      "quantity": 1,
+      "po_unit_price": 459,
+      "sku": "FT-HIK-7616K2-16P",
+      "match_confidence": "high",
+      "match_note": "Exact part number"
+    },
+    {
+      "line": 5,
+      "customer_ref": "ST8000VE001",
+      "description": "Seagate SkyHawk AI 8TB HDD",
+      "quantity": 2,
+      "po_unit_price": 229,
+      "sku": "FT-HDD-8TB",
+      "match_confidence": "high",
+      "match_note": "Exact part number"
+    },
+    {
+      "line": 6,
+      "customer_ref": "CAT6-EXT-305",
+      "description": "CAT6 External PE Black 305m box",
+      "quantity": 2,
+      "po_unit_price": 169,
+      "sku": "FT-CAB-CAT6EXT",
+      "match_confidence": "high",
+      "match_note": "Customer's own code; description matches external CAT6 305m"
+    },
+    {
+      "line": 7,
+      "customer_ref": "DS-D5022FN-C",
+      "description": "Hikvision 22\" monitor",
+      "quantity": 1,
+      "po_unit_price": 129,
+      "sku": "FT-HIK-MON22",
+      "match_confidence": "high",
+      "match_note": "Exact part number"
+    }
+  ],
+  "totals": {
+    "po_subtotal": 3490,
+    "po_tax": 802.7,
+    "po_total": 4292.7,
+    "tax_rate_percent": 23
+  },
+  "flags": [
+    {
+      "severity": "warning",
+      "message": "Line 4 NVR is priced at €459.00 on the PO vs €489.00 list (€30.00, 6.1% below) — check for an agreed discount."
+    },
+    {
+      "severity": "info",
+      "message": "Customer asks for no substitutions without approval."
+    }
+  ]
+}

@@ -1,0 +1,135 @@
+{
+  "summary": "VeiligWerk Beveiliging are ordering Hikvision CCTV and a Pyronix wireless alarm (27 items) for an office project in Utrecht, needed by 27 Nov.",
+  "document": {
+    "kind": "purchase_order",
+    "language": "Dutch"
+  },
+  "customer": {
+    "name": "VeiligWerk Beveiliging B.V.",
+    "account": "C40018",
+    "account_confidence": "high",
+    "contact_name": "Jeroen de Vries",
+    "contact_email": "inkoop@veiligwerk.nl",
+    "contact_phone": "+31 30 555 0412",
+    "vat_number": "NL001234567B01"
+  },
+  "order": {
+    "po_number": "IO-2026-0412",
+    "po_date": "2026-11-13",
+    "required_date": "2026-11-27",
+    "quote_reference": null,
+    "job_reference": "PRJ-2611 De Wissel",
+    "currency": "EUR",
+    "payment_terms": "30 days from invoice date"
+  },
+  "fulfilment": {
+    "method": "delivery",
+    "branch": "NLX",
+    "deliver_to": {
+      "name": "Kantoorpand De Wissel",
+      "address_lines": [
+        "Stationsplein 14",
+        "Utrecht"
+      ],
+      "postcode": "3511 ED",
+      "country": "Netherlands"
+    },
+    "instructions": "Deliver via the rear entrance and report to reception. Part deliveries only by agreement. Email order confirmation to inkoop@veiligwerk.nl."
+  },
+  "lines": [
+    {
+      "line": 1,
+      "customer_ref": "DS-2CD2387G2-LU",
+      "description": "Hikvision 8MP ColorVu turretcamera 2,8mm (8MP ColorVu turret camera)",
+      "quantity": 6,
+      "po_unit_price": 189,
+      "sku": "FT-HIK-2387G2LU",
+      "match_confidence": "high",
+      "match_note": "Exact part number"
+    },
+    {
+      "line": 2,
+      "customer_ref": "DS-2CD2143G2-I",
+      "description": "Hikvision 4MP AcuSense domecamera 2,8mm (4MP AcuSense dome camera)",
+      "quantity": 8,
+      "po_unit_price": 119,
+      "sku": "FT-HIK-2143G2I",
+      "match_confidence": "high",
+      "match_note": "Exact part number"
+    },
+    {
+      "line": 3,
+      "customer_ref": "DS-7616NXI-K2/16P",
+      "description": "Hikvision NVR 16 kanalen met PoE (16-channel NVR with PoE)",
+      "quantity": 1,
+      "po_unit_price": 489,
+      "sku": "FT-HIK-7616K2-16P",
+      "match_confidence": "high",
+      "match_note": "Exact part number"
+    },
+    {
+      "line": 4,
+      "customer_ref": "ST4000VX016",
+      "description": "Harde schijf 4TB surveillance (4TB surveillance hard drive)",
+      "quantity": 2,
+      "po_unit_price": 119,
+      "sku": "FT-HDD-4TB",
+      "match_confidence": "high",
+      "match_note": "Exact part number"
+    },
+    {
+      "line": 5,
+      "customer_ref": "ENF32WE-APP",
+      "description": "Pyronix Enforcer 32-WE draadloze centrale (wireless panel)",
+      "quantity": 1,
+      "po_unit_price": 399,
+      "sku": "FT-PYR-ENF32WE",
+      "match_confidence": "high",
+      "match_note": "Exact part number"
+    },
+    {
+      "line": 6,
+      "customer_ref": "KX10DP-WE",
+      "description": "Pyronix draadloze PIR, huisdiervriendelijk (wireless pet-tolerant PIR)",
+      "quantity": 5,
+      "po_unit_price": 49,
+      "sku": "FT-PYR-KX10DP",
+      "match_confidence": "high",
+      "match_note": "Exact part number"
+    },
+    {
+      "line": 7,
+      "customer_ref": "MC1MINI-WE",
+      "description": "Draadloos magneetcontact (mini) (wireless mini door contact)",
+      "quantity": 4,
+      "po_unit_price": 29,
+      "sku": "FT-PYR-MC1MINI",
+      "match_confidence": "high",
+      "match_note": "Exact part number"
+    }
+  ],
+  "totals": {
+    "po_subtotal": 3573,
+    "po_tax": 750.33,
+    "po_total": 4323.33,
+    "tax_rate_percent": 21
+  },
+  "flags": [
+    {
+      "severity": "warning",
+      "message": "PO adds 21% Dutch BTW (€750.33) — confirm the VAT treatment for this cross-border order with accounts."
+    },
+    {
+      "severity": "info",
+      "message": "Document is in Dutch; line descriptions translated."
+    },
+    {
+      "severity": "info",
+      "message": "Customer wants an order confirmation emailed to inkoop@veiligwerk.nl."
+    },
+    {
+      "severity": "info",
+      "message": "All unit prices match list prices."
+    }
+  ]
+}
